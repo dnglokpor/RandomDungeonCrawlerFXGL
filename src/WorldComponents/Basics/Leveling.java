@@ -75,6 +75,8 @@ public class Leveling {
 
         /** constructor:
          * expects an initial value and a max value
+         * @param initial the initial level of the rank.
+         * @param max the maximum level the rank can reach.
          */
         public Rank(int initial, int max){
             super(initial); // build underlying level

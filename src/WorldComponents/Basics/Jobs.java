@@ -21,8 +21,8 @@ public class Jobs {
      */
     public static class Job{
         // internal constants: could eventually change as implementation happens.
-        private final int MAX_RANK = 100;
-        private final int NUM_ACTIONS = 3;
+        private final int MAX_RANK = 10;
+        private final int NUM_ACTIONS = 5;
         // attributes
         protected final String name;
         protected final Rank rank;
@@ -39,7 +39,36 @@ public class Jobs {
             this.name = name;
             this.rank = new Rank(1, MAX_RANK);
             this.devTable = devTable.clone();
-            //
+            // internally
+            this.learnable = new Action[NUM_ACTIONS];
+        }
+
+        // getters
+        /**
+         * @return the job's name.
+         */
+        public String name(){
+            return this.name;
+        }
+        /**
+         * @return the job's rank.
+         */
+        public Rank rank(){
+            return this.rank;
+        }
+        /**
+         * @return the job' stats development table.
+         */
+        public float[] devTable(){
+            return this.devTable;
+        }
+        /**
+         * @return the job's action list.
+         */
+        public Action[] learnable(){
+            return this.learnable;
         }
     }
+
+    // TODO create at least one custom Job subclass eg: fighter
 }
