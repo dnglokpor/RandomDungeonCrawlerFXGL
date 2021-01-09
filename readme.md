@@ -2,7 +2,7 @@ Project name: **Random Dungeon Crawler**
 
 Author: myLewysG (Delwys Glokpor)
 
-*This project is a refactor of the original project (ref @ https://github.com/dnglokpor/RandomDungeonCrawler) for use as a maven GUI application using FXGL (ref @ https://github.com/AlmasB/FXGL).*
+*This project is a refactor of the original project (ref @ https://github.com/dnglokpor/RandomDungeonCrawler) for use as a GUI application using FXGL (ref @ https://github.com/AlmasB/FXGL).*
 
 1 - Overall Description:
     `RanDunCrawl` is a fantasy dungeon crawler that is based on the discord explorer bot created and updated till September 2020 (ref @ https://github.com/dnglokpor/IsekaiBot). The idea is a single player (or a party but that is for later) that explores a dungeon divided in floors (for convenience). The goal is to completely explore the dungeon which means exploring all the floors. To do this the player must conquer all the dangers that lurk in the floors. My current goal is 50 floors. The game world will feature a time system which means there will be days that will be broken in time periods. This will somewhat affect the town and the dungeon. The player will have to be conscienscious of this.
