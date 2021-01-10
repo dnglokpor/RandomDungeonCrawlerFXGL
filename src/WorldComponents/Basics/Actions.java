@@ -2,8 +2,6 @@ package WorldComponents.Basics;
 
 import WorldComponents.Basics.Elements.*;
 
-import org.jetbrains.annotations.NotNull;
-
 /** Actions package:
  * actions represents possible actions that hostiles and explorers can do in battle. this includes
  * any skill that they will use during their turn in the battle system. actions will be based on
@@ -45,6 +43,7 @@ public class Actions{
         protected final float multiplier;
         protected final int accuracy;
         protected final int cooldown;
+        protected int timer; // track cooldown
         protected final int duration;
         protected final String description;
 
@@ -72,6 +71,7 @@ public class Actions{
             this.multiplier = multx;
             this.accuracy = acc;
             this.cooldown = coold;
+            this.timer = this.cooldown; // because it tracks the cooldown
             this.duration = dur;
             this.description = description;
         }
@@ -116,8 +116,14 @@ public class Actions{
         /**
          * @return the cooldown time
          */
-        public int timer(){
+        public int cooldown(){
             return this.cooldown;
+        }
+        /**
+         * @return the cooldown timer value
+         */
+        public int timer(){
+            return this.timer;
         }
         /**
          * @return the duration
@@ -130,6 +136,23 @@ public class Actions{
          */
         public String describe(){
             return this.description;
+        }
+
+        // setters
+        /**
+         * reduce the value of the cooldown timer by a unit if not "0" and check if it is "0".
+         * @return true if this.timer == 0
+         */
+        public boolean ready(){
+            if(this.timer > 0) // the move wasn't previously ready
+                this.timer--; // we count down
+            return this.timer == 0; // we check if it is ready now
+        }
+        /**
+         * resets the cooldown timer of an action that was used.
+         */
+        public void cool(){
+            this.timer = this.cooldown;
         }
 
         // other methods
@@ -202,7 +225,7 @@ public class Actions{
          * @param stats a list of stats that will be modified by this action.
          */
         public Buff(String name, Element attr, Category catg, Target tgt, float multx,
-                    int acc, int coold, int dur, @NotNull String[] stats, String description)
+                    int acc, int coold, int dur, String[] stats, String description)
         {
             // build underlying Action
             super(name, attr, catg, tgt, multx, acc, coold, dur, description);
@@ -255,7 +278,7 @@ public class Actions{
          * @param stats a list of stats that will be modified by this action.
          */
         public Nerf(String name, Element attr, Category catg, Target tgt, float multx,
-                    int acc, int coold, int dur, @NotNull String[] stats, String description)
+                    int acc, int coold, int dur, String[] stats, String description)
         {
             // build underlying Action
             super(name, attr, catg, tgt, multx, acc, coold, dur, description);
