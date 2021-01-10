@@ -18,9 +18,9 @@ public class Collectibles {
     public static class Item{
 
         // attributes
-        protected String name;
-        protected String description;
-        protected int price;
+        protected final String name;
+        protected final String description;
+        protected final int price;
 
         /** constructor:
          * expects a name and a description.
@@ -74,9 +74,9 @@ public class Collectibles {
     public static class Gear extends Item{
 
         // attributes
-        final private GearType type;
-        final private StatSet stats;
-        final private GearReq req;
+        private final GearType type;
+        private final StatSet stats;
+        private final GearReq req;
 
         /** constructor:
          * expects a name, a description and a price but also an array of initial stat values.

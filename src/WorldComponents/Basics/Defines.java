@@ -7,8 +7,13 @@ public class Defines {
 
     /* STATS */
     // enum of all possible stats in RDC
-    public  static  final String[] STATS = {
+    public static  final String[] STATS = {
         "HP", "ATK", "DEF", "MAGI", "RES", "SPD", "LUCK"
+    };
+
+    /* JOBS */
+    public static final  String[] JOBS = {
+        "Fighter", "Caster", "Survivalist"
     };
 
     /* GEAR */
@@ -19,7 +24,7 @@ public class Defines {
      * to be provided to each gear during its instantiation.
      */
     public enum GearType{
-        KNIFE, SWORD, SPEAR, BOW, CATALYST, // weapons
+        DAGGER, AXE, SWORD, SPEAR, BOW, CATALYST, // weapons
         SHIELD, HEAVY, LIGHT, ROBE, // ARMORS
         RING, BRACELET, AMULET; // ACCESSORIES
     }
