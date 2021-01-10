@@ -1,0 +1,13 @@
+{
+  "type": "nerf",
+  "name": "Bash",
+  "description": "Destabilizes an enemy with a heavy bash of weapon or shield and lower their defense.",
+  "accuracy": 95,
+  "attribute": -1,
+  "category": "physical",
+  "cooldown": 5,
+  "target": "oppt",
+  "multiplier": 0.3,
+  "duration": 3,
+  "stats": ["DEF"]
+}

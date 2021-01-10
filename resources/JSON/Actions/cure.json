@@ -1,0 +1,13 @@
+{
+  "type": "buff",
+  "name": "Cure",
+  "description": "Magically activate cells regeneration to heal superficial injuries.",
+  "accuracy": 100,
+  "attribute": -1,
+  "category": "special",
+  "cooldown": 6,
+  "target": "self",
+  "multiplier": 0.3,
+  "duration": 0,
+  "stats": ["HP"]
+}

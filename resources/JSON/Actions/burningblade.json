@@ -1,0 +1,13 @@
+{
+  "type": "agress",
+  "name": "Burning blade",
+  "description": "Hit an enemy with a blade strike infused with the Fire element.",
+  "accuracy": 90,
+  "attribute": 3,
+  "category": "physical",
+  "cooldown": 6,
+  "target": "oppt",
+  "multiplier": 1.2,
+  "duration": 0,
+  "stats": null
+}

@@ -1,0 +1,13 @@
+{
+  "type": "agress",
+  "name": "Cleave",
+  "description": "Slash an enemy with a swift yet powerful blade strike.",
+  "accuracy": 90,
+  "attribute": -1,
+  "category": "physical",
+  "cooldown": 3,
+  "target": "oppt",
+  "multiplier": 1.5,
+  "duration": 0,
+  "stats": null
+}

@@ -1,0 +1,13 @@
+{
+  "type": "buff",
+  "name": "War cry",
+  "description": "Angry scream that gives courage and raise attack power.",
+  "accuracy": 100,
+  "attribute": -1,
+  "category": "special",
+  "cooldown": 5,
+  "target": "self",
+  "multiplier": 0.3,
+  "duration": 3,
+  "stats": ["ATK"]
+}

@@ -1,0 +1,29 @@
+All actions need:
+ - type: string ["agress", "buff", "nerf"]
+ - name: string
+ - description: string
+ - accuracy: number -> [1-100]
+ - elemental attribute: number -> [-1=NONE, 0=AIR, 1=EARTH, 2=WATER, 3=FIRE]
+ - category: string -> ["physical", "special"]
+ - cooldown: number -> [0, ...]
+ - target: string -> ["oppt", "oppx", "ally", "allx", "self"]
+ - multiplier: number [.1, ...]
+ - duration: number [0, ...]
+
+Buffs and Nerfs need on top:
+ - stats: list -> [null, [any of "HP", "ATK", "DEF", "MAGI", "RES", "SPD", "LUCK"]]
+
+Template:
+{
+  "type": "",
+  "name": "",
+  "description": "",
+  "accuracy": 0,
+  "attribute": -1,
+  "category": "",
+  "cooldown": 0,
+  "target": "",
+  "multiplier": 0.0,
+  "duration": 0,
+  "stats": null
+}
