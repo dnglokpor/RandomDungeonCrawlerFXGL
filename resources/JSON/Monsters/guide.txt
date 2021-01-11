@@ -1,0 +1,23 @@
+All monsters need:
+- name: string -> ["anything"]
+- description: string -> ["anything"]
+- attribute: number -> [-1=NONE, 0=AIR, 1=EARTH, 2=WATER, 3=FIRE]
+- level: number -> [1, ...]
+- stats: list -> [7 int numbers]
+- loot: list -> [up to 3 strings that are name of existing items]
+
+bosses need on top:
+- forms: number -> [null, [3, ...]]
+- enhanced: list -> [null, [any of combination "HP", "ATK", "DEF", "MAGI", "RES", "SPD", "LUCK"]]
+
+template:
+{
+    "name": "",
+    "description": "",
+    "attribute": -1,
+    "level": 1,
+    "stats": [0, 0, 0, 0, 0, 0, 0],
+    "loot": ["",]
+    "forms": 3,
+    "enhanced": [""]
+}
