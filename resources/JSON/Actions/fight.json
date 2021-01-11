@@ -1,0 +1,13 @@
+{
+  "type": "Agress",
+  "name": "Fight",
+  "description": "Fighter's basic. Attack an opponent with held weapon to deal physical damage.",
+  "accuracy": 95,
+  "attribute": -1,
+  "category": "physical",
+  "cooldown": 0,
+  "target": "oppt",
+  "multiplier": 1.0,
+  "duration": 0,
+  "stats": null
+}
