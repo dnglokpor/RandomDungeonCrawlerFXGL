@@ -1,0 +1,11 @@
+All items need:
+- name: string -> ["anything"]
+- description: -> ["anything"]
+- value: number -> [1, ...]
+
+template:
+{
+    "name": "",
+    "description": "",
+    "value": 0
+}
