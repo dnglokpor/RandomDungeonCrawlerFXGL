@@ -152,8 +152,8 @@ public class Stats {
         }
         /**
          * reset all the stats of the set but the "HP" to their max value. This can be used at the
-         * end of a fight to remove buffs and nerfs that way the stats are at their normal values for
-         * next fight.
+         * end of a fight.json to remove buffs and nerfs that way the stats are at their normal values for
+         * next fight.json.
          */
         public void cleanseAll(){
             for(String stat : Defines.STATS){

@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import WorldComponents.Basics.Defines;
 import WorldComponents.Basics.Collectibles.Item;
+import WorldComponents.Basics.Elements.Element;
 import WorldComponents.Basics.Unit;
 import Customs.Exceptions.WrongSizeStatsArrayException;
 import Customs.Exceptions.NegativeValueArgumentException;
@@ -17,10 +18,12 @@ public class Hostiles {
 
     /** Monster object:
      * this class represents regular hostile mobs that can be encountered while exploring the dungeon floors.
-     * they inherits units attributes but also initialize their own carried attribute.
+     * they inherits units attributes but also initialize their own description and carried attributes.
      */
     public static class Monster extends Unit{
         // attributes
+        protected final Element attribute;
+        protected final String description;
         protected Item[] carried;
 
         // constructor
@@ -30,13 +33,15 @@ public class Hostiles {
          * @param level initial level of the unit.
          * @param loot list of items that carried to be dropped on death.
          * @param name the name of the monster.
+         * @param description the description of the monster
          */
-        public Monster(String name, int level, int[] initStats,
-                       Item[] loot) throws WrongSizeStatsArrayException
+        public Monster(String name, String description, Element attribute, int level, int[] initStats,
+            Item[] loot) throws WrongSizeStatsArrayException
         {
             super(name, level, initStats); // build unit
-            // deep copy the loot
-            this.carried = loot.clone();
+            this.attribute = attribute;
+            this.carried = loot.clone(); // deep copy the loot
+            this.description = description;
         }
 
         // getters
@@ -47,6 +52,10 @@ public class Hostiles {
         public Item[] carried(){
             return this.carried;
         }
+        /**
+         * @return the description of the monster.
+         */
+        public String description() { return this.description; }
     }
 
     /** Boss object:
@@ -71,11 +80,11 @@ public class Hostiles {
          * @param forms the number of forms the boss has.
          * @param statsList the list of the stats that will be enhanced.
          */
-        public Boss(String name, int level, int[] initStats,  Item[] loot, int forms, String[] statsList) throws
-                WrongSizeStatsArrayException
+        public Boss(String name, String description, Element attribute, int level, int[] initStats, Item[] loot,
+                int forms, String[] statsList) throws WrongSizeStatsArrayException
         {
             // build the monster
-            super(name, level, initStats, loot);
+            super(name, description, attribute, level, initStats, loot);
             // add Boss attributes
             this.forms = forms;
             this.statsToEnhance = statsList.clone();

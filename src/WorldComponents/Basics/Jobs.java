@@ -2,6 +2,7 @@ package WorldComponents.Basics;
 
 import java.util.Hashtable;
 
+import Customs.Exceptions.NegativeValueArgumentException;
 import WorldComponents.Basics.Leveling.Rank;
 import WorldComponents.Basics.Actions.*;
 import Customs.Utilities.JsonIO;
@@ -18,9 +19,10 @@ public class Jobs {
 
     /** Job object:
      * object that provides the base properties of a job such as a name, a rank a stat development
-     * table and and a the list of actions they unlock as they learn. except for the list of actions,
-     * all those are immutable properties. this class will be inherited by preset subclasses that
-     * define actual jobs.
+     * table and and a the list of actions they unlock as they learn. there will always be an action
+     * learned by default and it is the job's custom basic action. except for the list of actions,
+     * all those are immutable properties. this class cannot be instantiated but will be inherited
+     * by preset subclasses that define the actual jobs.
      */
     public static abstract class Job{
         // internal constants: could eventually change as implementation happens.
@@ -82,6 +84,11 @@ public class Jobs {
         public Hashtable<Integer, Action> learnable(){
             return this.learnable;
         }
+        /**
+         * @param level the level at which the action is learned.
+         * @return the action learned at that level if defined; else return null
+         */
+        public Action learnedAt(int level){ return this.learnable.get(level); }
 
         // setters
         /**
@@ -89,7 +96,7 @@ public class Jobs {
          * @param mastery the amount of Job experience earned.
          * @return a boolean that is true when the rank levels up but false otherwise.
          */
-        public boolean master(int mastery){
+        public boolean master(int mastery) throws NegativeValueArgumentException {
             return this.rank.earn(mastery);
         }
     }
@@ -113,6 +120,7 @@ public class Jobs {
                 new float[]{/*HP*/.2f, /*ATK*/.2f, /*DEF*/.2f, /*MAGI*/.1f, /*RES*/.1f, /*SPD*/.1f, /*LUCK*/.1f}
             );
             // fill in the actions one by one to build the custom class learnable set.
+            this.learnable.put(1, JsonIO.loadAction("fight"));  // basic
             this.learnable.put(3, JsonIO.loadAction("warcry"));
             this.learnable.put(5, JsonIO.loadAction("cleave"));
             this.learnable.put(8, JsonIO.loadAction("cure"));

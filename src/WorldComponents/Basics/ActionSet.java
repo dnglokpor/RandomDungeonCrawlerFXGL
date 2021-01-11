@@ -5,7 +5,7 @@ import Customs.Exceptions.NullActionArgumentException;
 
 /**ActionSet object:
  * an action set is a set of actions that a unit have at his disposal at all time. this allows a unit
- * to fight in a battle. The action set is empty by default. it has to be set up for particular units
+ * to fight.json in a battle. The action set is empty by default. it has to be set up for particular units
  * like hostiles when they are instantiated. the set is made of 3 separate actions: the basic action
  * which the unit can perform at all times, the skill action that the unit can perform only when this
  * is ready and the critical action that the unit performs once they reach a critical state.
@@ -47,41 +47,38 @@ public class ActionSet{
 
     // setters
     /**
-     * set the basic Action. this returns the previous action that was assigned to this.basic.
-     * if no actions were previously assigned, then this returns null.
+     * set the basic Action.
      * @param newAction the action to set as basic.
+     * @throws NullActionArgumentException if newAction is null.
      */
-    public Action setBasic(Action newAction) throws NullActionArgumentException {
+    public void setBasic(Action newAction) throws NullActionArgumentException {
         if(newAction != null) {
             Action old = this.basic; // reassign pointer of old action
             this.basic = newAction.clone();
-            return old;
         }else
             throw new NullActionArgumentException("Setting actions require non null arguments.");
     }
     /**
-     * set the skill Action. this returns the previous action that was assigned to this.skill.
-     * if no actions were previously assigned, then this returns null.
+     * set the skill Action.
      * @param newAction the action to set as skill.
+     * @throws NullActionArgumentException if newAction is null.
      */
-    public Action setSkill(Action newAction) throws NullActionArgumentException {
+    public void setSkill(Action newAction) throws NullActionArgumentException {
         if(newAction != null) {
             Action old = this.skill; // reassign pointer of old action
             this.skill = newAction.clone();
-            return old;
         }else
             throw new NullActionArgumentException("Setting actions require non null arguments.");
     }
     /**
-     * set the critical Action. this returns the previous action that was assigned to this.critical.
-     * if no actions were previously assigned, then this returns null.
+     * set the critical Action.
      * @param newAction the action to set as critical.
+     * @throws NullActionArgumentException if newAction is null.
      */
-    public Action setCritical(Action newAction) throws NullActionArgumentException {
+    public void setCritical(Action newAction) throws NullActionArgumentException {
         if(newAction != null) {
             Action old = this.critical; // reassign pointer of old action
             this.critical = newAction.clone();
-            return old;
         }else
             throw new NullActionArgumentException("Setting actions require non null arguments.");
     }

@@ -16,8 +16,8 @@ public class Actions{
      * is used to determine whether an action will use physical-related stats (ATK, DEF) or
      * special-related stats (MAGI, RES).
      */
-    public static enum Category{
-        PHYSICAL, SPECIAL;
+    public enum Category{
+        PHYSICAL, SPECIAL
     }
 
     /** Target enum:
@@ -25,8 +25,8 @@ public class Actions{
      * or the unit itself (SELF) or all opponents (OPPX) or all allies - itself included (ALLX). this
      * allows the battle system to know the targets of an action.
      */
-    public static enum Target{
-        OPPT, ALLY, SELF, OPPX, ALLX;
+    public enum Target{
+        OPPT, ALLY, SELF, OPPX, ALLX
     }
 
     /** Action object:
@@ -125,6 +125,11 @@ public class Actions{
         public int timer(){
             return this.timer;
         }
+
+        /**
+         * @return true if the cooldown timer is 0 and false if it is not.
+         */
+        public boolean isReady(){ return this.timer == 0; }
         /**
          * @return the duration
          */
@@ -143,7 +148,7 @@ public class Actions{
          * reduce the value of the cooldown timer by a unit if not "0" and check if it is "0".
          * @return true if this.timer == 0
          */
-        public boolean ready(){
+        public boolean cool(){
             if(this.timer > 0) // the move wasn't previously ready
                 this.timer--; // we count down
             return this.timer == 0; // we check if it is ready now
@@ -151,7 +156,7 @@ public class Actions{
         /**
          * resets the cooldown timer of an action that was used.
          */
-        public void cool(){
+        public void freeze(){
             this.timer = this.cooldown;
         }
 
