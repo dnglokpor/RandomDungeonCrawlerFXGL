@@ -34,7 +34,7 @@ public class Defines {
      * a gear can be equipped on a unit body.
      */
     public enum GearReq {
-        ONE_HAND, TWO_HAND, BODY, ACCESSORY;
+        ONE_HAND, TWO_HAND, BODY, ACCESSORY
     }
 
     /** BodySlot enum:
@@ -42,6 +42,14 @@ public class Defines {
      * its slot value.
      */
     public enum BodySlot{
-        LHAND, RHAND, ARMOR, WEARABLE;
+        LHAND, RHAND, ARMOR, WEARABLE
+    }
+
+    /* BATTLE */
+    /** BattleType enum:
+     * possibles values of a battle in the dungeon. You either face monsters or a Bosses.
+     */
+    public enum BattleType{
+        MONSTER, BOSS
     }
 }
