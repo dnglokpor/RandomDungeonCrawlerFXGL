@@ -1,4 +1,5 @@
 All monsters need:
+- type: string -> ["monster", "boss"]
 - name: string -> ["anything"]
 - description: string -> ["anything"]
 - attribute: number -> [-1=NONE, 0=AIR, 1=EARTH, 2=WATER, 3=FIRE]
@@ -12,6 +13,7 @@ bosses need on top:
 
 template:
 {
+    "type": "monster"
     "name": "",
     "description": "",
     "attribute": -1,

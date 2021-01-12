@@ -1,4 +1,5 @@
 {
+  "type": "monster",
   "name": "Slime",
   "description": "Gooey-like creature that crawls around trying to dissolve everything they see.",
   "attribute": -1,
