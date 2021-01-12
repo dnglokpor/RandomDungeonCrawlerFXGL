@@ -26,8 +26,7 @@ public class Hostiles {
         protected final String description;
         protected Item[] carried;
 
-        // constructor
-        /**
+        /** constructor:
          * expects a name, a level value, a stats set, and a list of loot items.
          * @param initStats initial values of the unit stats.
          * @param level initial level of the unit.
@@ -40,7 +39,7 @@ public class Hostiles {
         {
             super(name, level, initStats); // build unit
             this.attribute = attribute;
-            this.carried = loot.clone(); // deep copy the loot
+            this.carried = loot; // deep copy the loot
             this.description = description;
         }
 
