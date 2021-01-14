@@ -25,11 +25,23 @@ public class Body{
      */
     public Body(){
         // create the slots table
-        slots = new Hashtable<BodySlot, Gear>();
+        this.slots = new Hashtable<BodySlot, Gear>();
         this.slots.put(BodySlot.LHAND, null); // left hand
         this.slots.put(BodySlot.RHAND, null); // right hand
         this.slots.put(BodySlot.ARMOR, null); // body protection armor
         this.slots.put(BodySlot.WEARABLE, null); // accessory
+    }
+    /** copy constructor:
+     * makes a new Body object with the same equipment as the model.
+     * @param model the model Body to clone.
+     * @throws UndefinedKeyException only of the original Body was flawed.
+     */
+    public Body(Body model) throws UndefinedKeyException {
+       this.slots = new Hashtable<BodySlot, Gear>();
+       this.slots.put(BodySlot.LHAND, model.wearsAt(BodySlot.LHAND));
+       this.slots.put(BodySlot.RHAND, model.wearsAt(BodySlot.RHAND));
+       this.slots.put(BodySlot.ARMOR, model.wearsAt(BodySlot.ARMOR));
+       this.slots.put(BodySlot.WEARABLE, model.wearsAt(BodySlot.WEARABLE));
     }
 
     // getters

@@ -133,6 +133,28 @@ public class Stats {
             return this.set;
         }
         /**
+         * @return an int[] with the current values of the Statset.
+         */
+        public int[] getSetCurrents(){
+            int[] statsArray = new int[Defines.STATS.length];
+            int i = 0;
+            for(String stat : Defines.STATS){
+                statsArray[i] = this.getStat(stat).current;
+            }
+            return statsArray;
+        }
+        /**
+         * @return an int[] with the max values of the Statset.
+         */
+        public int[] getSetMaxes(){
+            int[] statsArray = new int[Defines.STATS.length];
+            int i = 0;
+            for(String stat : Defines.STATS){
+                statsArray[i] = this.getStat(stat).current;
+            }
+            return statsArray;
+        }
+        /**
          * returns the Stat specified by stat.
          * @param stat the string key of the stat sought.
          */

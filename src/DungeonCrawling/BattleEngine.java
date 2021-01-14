@@ -1,14 +1,18 @@
 package DungeonCrawling;
 
 import java.util.ArrayList;
+import java.util.Queue;
+import java.util.concurrent.PriorityBlockingQueue;
 import java.util.concurrent.ThreadLocalRandom;
 
 import Customs.Exceptions.NullActionArgumentException;
+import Customs.Exceptions.UndefinedKeyException;
 import Customs.Utilities.JsonIO;
 import WorldComponents.Basics.Defines.BattleType;
+import WorldComponents.Basics.Unit;
 import WorldComponents.Mobs.Hostiles.Monster;
 import WorldComponents.Mobs.Hostiles.Boss;
-import Customs.Utilities.JsonIO.*;
+import WorldComponents.Mobs.Explorer;
 
 /** BattleEngine package:
  * this package contains methods that will be used to compute a fight between an explorer and a group of
@@ -21,12 +25,20 @@ import Customs.Utilities.JsonIO.*;
  */
 public class BattleEngine {
     // attributes
+    // floor setup
     private static final int MAX_NUM_OF_MONSTERS = 5; // how many monsters can attack at the same time
     private static final int CHANCES_OF_ADDITIONAL = 10; // the chances of spawning one more monster per danger level
-    private static int dangerLevel = 1;
-    private static BattleType battleType = BattleType.MONSTER;
+    private static int dangerLevel = 1; // how dangerous the floor is
+    private static String[] hostilesList = null; // list of all regular monsters
+    private static int[] hostilesChances = null; // chances of encounter of each
+    private static String boss = null; // boss monster (singleton)
+    private static Explorer player = null; // to store the player
+    // battle setup
+    private static ArrayList<Monster> hostiles = null;
+    private static BattleType battleType = BattleType.MONSTER; // type of battle
+    private static Queue<Unit> turnOrder = null;
 
-    // setters
+    // setters to set all the private global variables for this class
     /**
      * set the danger level of the floor. the danger level raise the chances of meeting more monsters and
      * reduces the chances of escaping.
@@ -42,53 +54,75 @@ public class BattleEngine {
      * passed arguments and automate the battle.
      * @param battleType can be set to either MONSTER or BOSS.
      */
-    public static void setBattleType(BattleType battleType){
-        BattleEngine.battleType = battleType;
-    }
+    public static void setBattleType(BattleType battleType){ BattleEngine.battleType = battleType; }
+    /**
+     * set the list of hostile mobs that can be spawned.
+     * @param hList the array of names of all the mobs that can be spawned.
+     */
+    public static void setHostilesList(String[] hList) { hostilesList = hList; }
+    /**
+     * set the chances of encounter of each hostiles on the floor.
+     * @param chances an array of integers from 1 to 100 that represent chances of meeting each monster.
+     */
+    public static void setHostilesChances(int[] chances){ hostilesChances = chances; }
+    /**
+     * set the boss monster of the level. there can only be one boss monster.
+     * @param bName is the name of the boss monster.
+     */
+    public static void setBosses(String bName){ boss = bName; }
+    /**
+     * set the player that is doing the exploration
+     * @param p the Explorer object.
+     */
+    public static void setPlayer(Explorer p){ player = p; } // by reference is fine
+
+    //getters
+    /**
+     * @return the player object that was set. can be used to recover the player with all the changes from battle.
+     */
+    public static Explorer getPlayer(){ return player; }
 
     // battle related methods
 
     /**
      * creates the list of opponents from the passed list of possible opponents name. the arguments
      * can not be null.
-     * @param hostiles a String array that contains the name of all the hostiles that can be spawned.
-     * @param chances the chances to meet each of the monsters.
-     * @return a list of monsters. list can be a singleton.
      * @throws Exception if monster creation from JSON file failed for reasons.
      */
-    public static ArrayList<Monster> monsterParty(String[] hostiles, int[] chances) throws Exception {
-        // check validity of passed arguments
-        if(hostiles == null || chances == null){
-            throw new NullActionArgumentException("arguments may not be null");
-        }
-        // else we proceed and set return up
-        ArrayList<Monster> spawned = new ArrayList<Monster>();
-        // spawn monsters
+    public static ArrayList<Monster> monsterParty() throws Exception {
         if (battleType == BattleType.MONSTER) { // multiple monsters with numbers to be randomly determined
+            // check validity of passed arguments
+            if(hostilesList == null || hostilesChances == null){
+                throw new NullActionArgumentException("arguments may not be null");
+            }
+            // else we proceed
             int partySize = ThreadLocalRandom.current().nextInt(MAX_NUM_OF_MONSTERS) + 1; // define a party size
             if (partySize < MAX_NUM_OF_MONSTERS) { // danger level
                 if (ThreadLocalRandom.current().nextInt(100) < dangerLevel * CHANCES_OF_ADDITIONAL) {
                     partySize++; // add one more monster to the party because of the danger level.
                 }
             }
-            int monsterIndex = 0; // monster to spawn from hostiles array
+            int monsterIndex; // monster to spawn from hostiles array
             int herdSize; // how many of this particular monster
-            while (spawned.size() < partySize) {
+            while (partySize > 0) { // partySize will be reduced as spawned grows.
                 // choose an index
-                monsterIndex = ThreadLocalRandom.current().nextInt(hostiles.length);
-                if (ThreadLocalRandom.current().nextInt(100) < chances[monsterIndex]) {
+                monsterIndex = ThreadLocalRandom.current().nextInt(hostilesList.length);
+                if (ThreadLocalRandom.current().nextInt(100) < hostilesChances[monsterIndex]) {
                     // we can meet this monster so check how many there are
                     herdSize = ThreadLocalRandom.current().nextInt(partySize + 1);
                     for (int i = 0; i < herdSize; i++)
-                        spawned.add(JsonIO.loadHostile(hostiles[monsterIndex])); // and spawn those
+                        hostiles.add(JsonIO.loadHostile(hostilesList[monsterIndex])); // and spawn those
                     // update the party size
                     partySize -= herdSize;
                 }
             }
-        } else { // supposing BattleType.BOSS. passed monster (hostiles[0]) must be spawned and returned.
-            spawned.add(JsonIO.loadHostile(hostiles[0]));
+        } else { // supposing BattleType.BOSS.
+            if(boss == null){ // check for validity of information
+                throw new NullActionArgumentException("argument may not be null");
+            }
+            // else we spawn the boss
+            hostiles.add(JsonIO.loadHostile(boss));
         }
-        // return
-        return spawned;
+        return hostiles;
     }
 }

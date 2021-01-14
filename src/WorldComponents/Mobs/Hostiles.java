@@ -25,6 +25,7 @@ public class Hostiles {
         protected final Element attribute;
         protected final String description;
         protected Item[] carried;
+        protected int forms;
 
         /** constructor:
          * expects a name, a level value, a stats set, and a list of loot items.
@@ -41,6 +42,7 @@ public class Hostiles {
             this.attribute = attribute;
             this.carried = loot; // deep copy the loot
             this.description = description;
+            this.forms = 1; // monsters only have one form
         }
 
         // getters
@@ -55,6 +57,12 @@ public class Hostiles {
          * @return the description of the monster.
          */
         public String description() { return this.description; }
+        /**
+         * @return the remaining number of forms.
+         */
+        public int forms(){
+            return this.forms;
+        }
     }
 
     /** Boss object:
@@ -65,7 +73,6 @@ public class Hostiles {
      */
     public static class Boss extends Monster{
         // attributes
-        int forms;
         String[] statsToEnhance;
 
         // constructor
@@ -90,12 +97,6 @@ public class Hostiles {
         }
 
         // getters
-        /**
-         * @return the remaining number of forms.
-         */
-        public int forms(){
-            return this.forms;
-        }
         /**
          * @return the list of stats that will be enhanced each form-change phase.
          */

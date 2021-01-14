@@ -1,7 +1,9 @@
 package WorldComponents.Mobs;
 
+import Customs.Exceptions.UndefinedKeyException;
 import WorldComponents.Basics.Body;
 import WorldComponents.Basics.Jobs.Job;
+import WorldComponents.Basics.Jobs.Fighter;
 import WorldComponents.Basics.StorageKits.Bag;
 import WorldComponents.Basics.StorageKits.Wallet;
 import WorldComponents.Basics.Unit;

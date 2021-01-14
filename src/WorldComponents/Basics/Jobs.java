@@ -52,6 +52,17 @@ public class Jobs {
             // internally
             this.learnable = new Hashtable<Integer, Action>();
         }
+        /** copy constructor:
+         * creates a duplicate Job object with the same attributes as the model.
+         * @param model the Job object to duplicate.
+         */
+        public Job(Job model){
+            this.name = model.name;
+            this.description = model.description;
+            this.rank = new Rank(model.rank.level, MAX_RANK);
+            this.devTable = (float[]) model.devTable.clone();
+            this.learnable = model.learnable; // ref is okay because learnable won't be modified after instantiation
+        }
 
         // getters
         /**
